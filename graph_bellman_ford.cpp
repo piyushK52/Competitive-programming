@@ -21,18 +21,11 @@ int main()
 
     for (int j = 1; j <= m; j++) 
     {
-      scanf("%d %d %d", &V[j], &U[j], &W[j]);
-      ++U[j], ++V[j];
-      adj[U[j]].push_back(V[j]); // graph stored in reverse order
+      scanf("%d %d %d", &U[j], &V[j], &W[j]);
+      adj[U[j]].push_back(V[j]); 
     }
     
-    /*cout<<"displaying the adjacency list: "<<endl;
-    for(int i=1;i<=n;i++)
-     {
-       for(int j=0;j<adj[i].size();j++)
-       cout<<adj[i][j]-1<<" ";
-       cout<<endl;
-     }*/
+    dis[1]=0;
     int ok = 1;
     for (int iter = 1; iter < n && ok; iter++) // if you find all the shortest path 
     { // in one go then you don't need to repeat it again, ok takes care of that
@@ -61,7 +54,15 @@ int main()
     queue<int> Q;
     for (auto node : cycle)
       Q.push(node);    // push all the potential that form a cycle in a queue
-
+    
+    cout<<"displaying queue contents"<<endl;
+    queue<int> ch=Q;
+    while(!ch.empty())
+    {
+    	cout<<ch.front()<<" ";
+    	ch.pop();
+	}
+	cout<<"***************"<<endl;
     while (!Q.empty()) // we find all the nodes reachable from potential nodes
     { // which basically will form the cycle
       int cur = Q.front();
